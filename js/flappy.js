@@ -167,18 +167,19 @@ function FlappyBird(
 	velJogo,
 	personagem,
 	tipo,
-	velPersonagem
+	velPersonagem,
+	pontuacao = 1
 ) {
 	let pontos = 0
 	const areaDoJogo = document.querySelector('[wm-flappy]')
 	areaDoJogo.style.backgroundColor =
-		cenario === 'noturno' ? 'darkgray' : 'white'
+		cenario === 'noturno' ? 'black' : 'lightgray'
 	const altura = areaDoJogo.clientHeight
 	const largura = areaDoJogo.clientWidth
 
 	const progresso = new Progresso()
 	const barreiras = new Barreiras(altura, largura, 200, 400, () =>
-		progresso.atualizarPontos(++pontos)
+		progresso.atualizarPontos((pontos += parseInt(pontuacao)))
 	)
 
 	const passaro = new Passaro(altura)
@@ -209,6 +210,7 @@ function FlappyBird(
 	const personagem = urlParams.get('personagem')
 	const tipo = urlParams.get('tipo')
 	const velPersonagem = urlParams.get('vel-personagem')
+	const pontuacao = urlParams.get('pontuacao')
 
 	document.getElementById('nome-usuario').innerHTML = nome
 
@@ -220,6 +222,7 @@ function FlappyBird(
 		velJogo,
 		personagem,
 		tipo,
-		velPersonagem
+		velPersonagem,
+		pontuacao
 	).start()
 })()
