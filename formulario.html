@@ -13,7 +13,7 @@
 			<form action="./index.html" method="get" id="form">
 				<div class="form-group">
 					<label for="nome">Nome do jogador: </label>
-					<input type="text" id="nome" name="nome" name="nome" />
+					<input type="text" id="nome" name="nome" value="Nome jogador" />
 				</div>
 				<div class="form-group">
 					<label for="cenario">Cenário do jogo: </label>
@@ -24,32 +24,70 @@
 				</div>
 				<div class="form-group">
 					<label for="intervalo">Intervalo entre a abertura dos canos: </label>
-					<label for="facil">facil</label>
-					<input type="radio" id="facil" name="intervalo" value="facil" />
-					<label for="medio">medio</label>
-					<input type="radio" id="medio" name="intervalo" value="medio" />
-					<label for="dificil">dificil</label>
-					<input type="radio" id="dificil" name="intervalo" value="dificil" />
+					<label for="intervalo-facil">facil</label>
+					<input
+						type="radio"
+						id="intervalo-facil"
+						name="intervalo"
+						value="facil"
+					/>
+					<label for="intervalo-medio">medio</label>
+					<input
+						type="radio"
+						id="intervalo-medio"
+						name="intervalo"
+						value="medio"
+					/>
+					<label for="intervalo-dificil">dificil</label>
+					<input
+						type="radio"
+						id="intervalo-dificil"
+						name="intervalo"
+						value="dificil"
+					/>
 				</div>
 				<div class="form-group">
 					<label for="distancia">Distancia entre os canos: </label>
-					<label for="facil">facil</label>
-					<input type="radio" id="facil" name="facil" value="facil" />
-					<label for="medio">medio</label>
-					<input type="radio" id="medio" name="medio" value="medio" />
-					<label for="dificil">dificil</label>
-					<input type="radio" id="dificil" name="dificil" value="dificil" />
+					<label for="distancia-facil">facil</label>
+					<input
+						type="radio"
+						id="distancia-facil"
+						name="distancia"
+						value="facil"
+					/>
+					<label for="distancia-medio">medio</label>
+					<input
+						type="radio"
+						id="distancia-medio"
+						name="distancia"
+						value="medio"
+					/>
+					<label for="distancia-dificil">dificil</label>
+					<input
+						type="radio"
+						id="distancia-dificil"
+						name="distancia"
+						value="dificil"
+					/>
 				</div>
 				<div class="form-group">
 					<label for="velocidade">Velocidade do jogo: </label>
-					<input type="number" id="velocidade" name="vel-jogo" />
+					<input
+						type="number"
+						id="velocidade"
+						name="vel-jogo"
+						value="20"
+						min="0"
+						max="50"
+						step="5"
+					/>
 				</div>
 				<div class="form-group">
 					<label for="personagem">Personagens: </label>
 					<select name="personagem">
-						<option value="personagem1" selected>Personagem 1</option>
-						<option value="personagem2">Personagem 2</option>
-						<option value="personagem3">Personagem 3</option>
+						<option value="kick" selected>Kick Buttowisk</option>
+						<option value="bob">Bob esponja</option>
+						<option value="ben10">Ben 10</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -62,16 +100,11 @@
 				<div class="form-group">
 					<label for="vel-personagem">Velocidade do personagem: </label>
 					<label for="baixa">baixa</label>
-					<input type="radio" id="baixa" name="vel-personagem" value="baixa" />
+					<input type="radio" id="baixa" name="vel-personagem" value="5" />
 					<label for="media">media</label>
-					<input type="radio" id="media" name="vel-personagem" value="media" />
+					<input type="radio" id="media" name="vel-personagem" value="8" />
 					<label for="rapida">rapida</label>
-					<input
-						type="radio"
-						id="rapida"
-						name="vel-personagem"
-						value="rapida"
-					/>
+					<input type="radio" id="rapida" name="vel-personagem" value="10" />
 				</div>
 				<div class="form-group">
 					<label for="pontuacao">Pontuação: </label>

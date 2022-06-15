@@ -79,11 +79,11 @@ setInterval(() => {
     barreiras.animar()
 },20)  */
 
-function Passaro(alturaJogo) {
+function Passaro(alturaJogo, personagem, velPersonagem) {
 	let voando = false
 
 	this.elemento = novoElemento('img', 'passaro')
-	this.elemento.src = 'img/passaro.png'
+	this.elemento.src = `img/${personagem}.png`
 
 	this.getY = () => parseInt(this.elemento.style.bottom.split('px')[0])
 	this.setY = y => (this.elemento.style.bottom = `${y}px`)
@@ -92,7 +92,7 @@ function Passaro(alturaJogo) {
 	window.onkeyup = e => (voando = false)
 
 	this.animar = () => {
-		const novoY = this.getY() + (voando ? 8 : -5)
+		const novoY = this.getY() + (voando ? parseInt(velPersonagem) : -5)
 		const alturaMaxima = alturaJogo - this.elemento.clientWidth
 
 		if (novoY <= 0) {
@@ -160,17 +160,27 @@ function colidiu(passaro, barreiras) {
 }
 
 function FlappyBird(
-	nome,
 	cenario,
-	intervalo,
-	distancia,
+	intervaloCanos = 'medio',
+	distanciaCanos,
 	velJogo,
 	personagem,
 	tipo,
-	velPersonagem,
+	velPersonagem = 8,
 	pontuacao = 1
 ) {
+	const intervaloCanosValores = {
+		facil: 150,
+		medio: 200,
+		dificil: 250,
+	}
+	const distanciaCanosValores = {
+		facil: 300,
+		medio: 400,
+		dificil: 500,
+	}
 	let pontos = 0
+
 	const areaDoJogo = document.querySelector('[wm-flappy]')
 	areaDoJogo.style.backgroundColor =
 		cenario === 'noturno' ? 'black' : 'lightgray'
@@ -178,11 +188,15 @@ function FlappyBird(
 	const largura = areaDoJogo.clientWidth
 
 	const progresso = new Progresso()
-	const barreiras = new Barreiras(altura, largura, 200, 400, () =>
-		progresso.atualizarPontos((pontos += parseInt(pontuacao)))
+	const barreiras = new Barreiras(
+		altura,
+		largura,
+		intervaloCanosValores[intervaloCanos],
+		distanciaCanosValores[distanciaCanos],
+		() => progresso.atualizarPontos((pontos += parseInt(pontuacao)))
 	)
 
-	const passaro = new Passaro(altura)
+	const passaro = new Passaro(altura, personagem, velPersonagem)
 
 	areaDoJogo.appendChild(progresso.elemento)
 	areaDoJogo.appendChild(passaro.elemento)
@@ -196,7 +210,7 @@ function FlappyBird(
 			if (colidiu(passaro, barreiras)) {
 				clearInterval(temporizador)
 			}
-		}, 20)
+		}, velJogo)
 	}
 }
 
@@ -204,8 +218,8 @@ function FlappyBird(
 	const urlParams = new URLSearchParams(window.location.search)
 	const nome = urlParams.get('nome')
 	const cenario = urlParams.get('cenario')
-	const intervalo = urlParams.get('intervalo')
-	const distancia = urlParams.get('distancia')
+	const intervaloCanos = urlParams.get('intervalo')
+	const distanciaCanos = urlParams.get('distancia')
 	const velJogo = urlParams.get('vel-jogo')
 	const personagem = urlParams.get('personagem')
 	const tipo = urlParams.get('tipo')
@@ -215,10 +229,9 @@ function FlappyBird(
 	document.getElementById('nome-usuario').innerHTML = nome
 
 	new FlappyBird(
-		nome,
 		cenario,
-		intervalo,
-		distancia,
+		intervaloCanos,
+		distanciaCanos,
 		velJogo,
 		personagem,
 		tipo,
