@@ -146,8 +146,15 @@ function FlappyBird(
 		largura,
 		parseInt(intervaloCanos),
 		parseInt(distanciaCanos),
-		() => progresso.atualizarPontos((pontos += parseInt(pontuacao)))
+		() => {
+			audio_coin.play()
+			progresso.atualizarPontos((pontos += parseInt(pontuacao)))
+		}
 	)
+
+	let audio_coin = document.querySelector('[coin]')
+	let audio_die = document.querySelector('[die]')
+	let audio_brad = document.querySelector('[brad]')
 
 	const passaro = new Passaro(altura, personagem, velPersonagem)
 
@@ -162,6 +169,7 @@ function FlappyBird(
 
 			if (tipo === 'real') {
 				if (colidiu(passaro, barreiras)) {
+					audio_die.play()
 					clearInterval(temporizador)
 				}
 			}
