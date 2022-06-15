@@ -124,27 +124,15 @@ function colidiu(passaro, barreiras) {
 
 function FlappyBird(
 	cenario,
-	intervaloCanos = 'medio',
+	intervaloCanos,
 	distanciaCanos,
 	velJogo,
 	personagem,
 	tipo,
-	velPersonagem = 8,
-	pontuacao = 1
+	velPersonagem,
+	pontuacao
 ) {
-	const intervaloCanosValores = {
-		facil: 150,
-		medio: 200,
-		dificil: 250,
-	}
-	const distanciaCanosValores = {
-		facil: 300,
-		medio: 400,
-		dificil: 500,
-	}
 	let pontos = 0
-
-	console.log()
 
 	const areaDoJogo = document.querySelector('[wm-flappy]')
 	areaDoJogo.style.backgroundColor =
@@ -156,8 +144,8 @@ function FlappyBird(
 	const barreiras = new Barreiras(
 		altura,
 		largura,
-		intervaloCanosValores[intervaloCanos],
-		distanciaCanosValores[distanciaCanos],
+		parseInt(intervaloCanos),
+		parseInt(distanciaCanos),
 		() => progresso.atualizarPontos((pontos += parseInt(pontuacao)))
 	)
 

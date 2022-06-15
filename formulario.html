@@ -18,7 +18,13 @@
 				<div class="form-group">
 					<label for="cenario">Cenário do jogo: </label>
 					<label for="noturno">Noturno</label>
-					<input type="radio" id="noturno" name="cenario" value="noturno" />
+					<input
+						type="radio"
+						id="noturno"
+						name="cenario"
+						value="noturno"
+						checked
+					/>
 					<label for="diurno">Diurno</label>
 					<input type="radio" id="diurno" name="cenario" value="diurno" />
 				</div>
@@ -29,21 +35,22 @@
 						type="radio"
 						id="intervalo-facil"
 						name="intervalo"
-						value="facil"
+						value="150"
 					/>
 					<label for="intervalo-medio">medio</label>
 					<input
 						type="radio"
 						id="intervalo-medio"
 						name="intervalo"
-						value="medio"
+						value="200"
+						checked
 					/>
 					<label for="intervalo-dificil">dificil</label>
 					<input
 						type="radio"
 						id="intervalo-dificil"
 						name="intervalo"
-						value="dificil"
+						value="250"
 					/>
 				</div>
 				<div class="form-group">
@@ -53,21 +60,22 @@
 						type="radio"
 						id="distancia-facil"
 						name="distancia"
-						value="facil"
+						value="300"
 					/>
 					<label for="distancia-medio">medio</label>
 					<input
 						type="radio"
 						id="distancia-medio"
 						name="distancia"
-						value="medio"
+						value="400"
+						checked
 					/>
 					<label for="distancia-dificil">dificil</label>
 					<input
 						type="radio"
 						id="distancia-dificil"
 						name="distancia"
-						value="dificil"
+						value="500"
 					/>
 				</div>
 				<div class="form-group">
@@ -95,21 +103,27 @@
 					<label for="treino">treino</label>
 					<input type="radio" id="treino" name="tipo" value="treino" />
 					<label for="real">real</label>
-					<input type="radio" id="real" name="tipo" value="real" />
+					<input type="radio" id="real" name="tipo" value="real" checked />
 				</div>
 				<div class="form-group">
 					<label for="vel-personagem">Velocidade do personagem: </label>
 					<label for="baixa">baixa</label>
 					<input type="radio" id="baixa" name="vel-personagem" value="5" />
 					<label for="media">media</label>
-					<input type="radio" id="media" name="vel-personagem" value="8" />
+					<input
+						type="radio"
+						id="media"
+						name="vel-personagem"
+						value="8"
+						checked
+					/>
 					<label for="rapida">rapida</label>
 					<input type="radio" id="rapida" name="vel-personagem" value="10" />
 				</div>
 				<div class="form-group">
 					<label for="pontuacao">Pontuação: </label>
 					<label for="1">1</label>
-					<input type="radio" id="1" name="pontuacao" value="1" />
+					<input type="radio" id="1" name="pontuacao" value="1" checked />
 					<label for="10">10</label>
 					<input type="radio" id="10" name="pontuacao" value="10" />
 					<label for="100">100</label>
