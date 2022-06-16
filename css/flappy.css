@@ -34,14 +34,28 @@ body {
 	height: 700px;
 	width: 1200px;
 	margin: 15px;
-	background-color: deepskyblue;
 	overflow: hidden;
+
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .character {
 	position: absolute;
 	width: 60px;
 	left: calc(50% - 30px);
+}
+
+.coin-container {
+	position: absolute;
+}
+
+.coin {
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	background-image: url('../assets/gifs/ring.gif');
+	background-size: cover;
 }
 
 .par-de-barreiras {
@@ -84,6 +98,36 @@ body {
 
 	-webkit-text-stroke-width: 2px;
 	-webkit-text-stroke-color: black;
+}
+
+.coin-progress {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	font-family: Pixel;
+	font-size: 70px;
+	z-index: 100;
+
+	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-color: black;
+}
+
+[gear-icon] {
+	cursor: pointer;
+
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	height: 50px;
+	width: 50px;
+
+	transition: transform 0.15s;
+
+	z-index: 100;
+}
+
+[gear-icon]:hover {
+	transform: scale(1.12);
 }
 
 [game-over] {

@@ -1,13 +1,13 @@
-function novoElemento(tagName, className) {
+function newElement(tagName, className) {
 	const elemento = document.createElement(tagName)
 	elemento.className = className
 	return elemento
 }
 
 function Barreira(reversa = false) {
-	this.elemento = novoElemento('div', 'barreira')
-	const borda = novoElemento('div', 'borda')
-	const corpo = novoElemento('div', 'corpo')
+	this.elemento = newElement('div', 'barreira')
+	const borda = newElement('div', 'borda')
+	const corpo = newElement('div', 'corpo')
 	this.elemento.appendChild(reversa ? corpo : borda)
 	this.elemento.appendChild(reversa ? borda : corpo)
 
@@ -15,7 +15,7 @@ function Barreira(reversa = false) {
 }
 
 function ParDeBarreiras(altura, abertura, popsicaoNaTela) {
-	this.elemento = novoElemento('div', 'par-de-barreiras')
+	this.elemento = newElement('div', 'par-de-barreiras')
 	this.superior = new Barreira(true)
 	this.inferior = new Barreira(false)
 
@@ -63,10 +63,69 @@ function Barreiras(altura, largura, abertura, espaco, notificarPonto) {
 	}
 }
 
-function createCharacter(alturaJogo, personagem, velPersonagem) {
+function createCoin() {
+	this.elemento = newElement('div', 'coin')
+
+	this.setAltura = altura => {
+		this.elemento.style.top = `${altura}px`
+	}
+
+	this.getY = () => parseInt(this.elemento.style.top.split('px')[0])
+}
+
+function Coin(alturaJogo, popsicaoNaTela) {
+	this.elemento = newElement('div', 'coin-container')
+	this.coin = new createCoin('div', 'coin')
+
+	this.elemento.appendChild(this.coin.elemento)
+
+	this.sortearAltura = () => {
+		const alturaMoeda = Math.random() * alturaJogo
+		const alturaMaxima = alturaJogo - 100
+
+		if (alturaMoeda <= 0) {
+			this.coin.setAltura(0)
+		} else if (alturaMoeda >= alturaMaxima) {
+			this.coin.setAltura(alturaMaxima)
+		} else {
+			this.coin.setAltura(alturaMoeda)
+		}
+	}
+
+	this.getX = () => parseInt(this.elemento.style.left.split('px')[0])
+	this.setX = popsicaoNaTela =>
+		(this.elemento.style.left = `${popsicaoNaTela}px`)
+	this.getLargura = () => this.elemento.clientWidth
+
+	this.sortearAltura()
+	this.setX(popsicaoNaTela)
+}
+
+function Coins(altura, largura, espaco) {
+	this.coins = [
+		new Coin(altura, largura - espaco / 2),
+		new Coin(altura, largura + espaco / 2),
+		new Coin(altura, largura + (espaco / 2) * 3),
+		new Coin(altura, largura + (espaco / 2) * 5),
+	]
+
+	const deslocamento = 3
+	this.animar = () => {
+		this.coins.forEach(coin => {
+			coin.setX(coin.getX() - deslocamento)
+
+			if (coin.getX() < -coin.getLargura()) {
+				coin.setX(coin.getX() + espaco * this.coins.length)
+				coin.sortearAltura()
+			}
+		})
+	}
+}
+
+function CreateCharacter(alturaJogo, personagem, velPersonagem) {
 	let voando = false
 
-	this.elemento = novoElemento('img', 'character')
+	this.elemento = newElement('img', 'character')
 	this.elemento.src = `assets/imgs/${personagem}.png`
 
 	this.getY = () => parseInt(this.elemento.style.bottom.split('px')[0])
@@ -90,12 +149,22 @@ function createCharacter(alturaJogo, personagem, velPersonagem) {
 	this.setY(alturaJogo / 2)
 }
 
-function Progresso() {
-	this.elemento = novoElemento('span', 'progresso')
+function Progress() {
+	this.elemento = newElement('span', 'progresso')
 	this.atualizarPontos = pontos => {
 		this.elemento.innerHTML = pontos
 	}
 	this.atualizarPontos(0)
+}
+
+function CoinProgress() {
+	this.element = newElement('span', 'coin-progress')
+
+	this.updateCoinPoints = points => {
+		this.element.innerHTML = points
+	}
+
+	this.updateCoinPoints(0)
 }
 
 function estaoSobrepostos(elementoA, elementoB) {
@@ -122,7 +191,24 @@ function colidiu(character, barreiras) {
 	return colidiu
 }
 
+function coinColision(character) {
+	let colision = false
+
+	const moedas = document.querySelectorAll('.coin')
+
+	moedas.forEach(coin => {
+		if (!colision) {
+			colision = estaoSobrepostos(character.elemento, coin)
+			colision &&
+				(coin.style.display = 'none') &&
+				setTimeout(() => (coin.style.display = 'block'), 5000)
+		}
+	})
+	return colision
+}
+
 function FlappyBird(
+	nome,
 	cenario,
 	intervaloCanos,
 	distanciaCanos,
@@ -132,52 +218,58 @@ function FlappyBird(
 	velPersonagem,
 	pontuacao
 ) {
-	let pontos = 0
+	let points = 0
+	let coinPoints = 0
 
 	const areaDoJogo = document.querySelector('[wm-flappy]')
-	areaDoJogo.style.backgroundImage =
-		cenario === 'noturno'
-			? 'url("https://krydastal.files.wordpress.com/2016/12/tumblr_static_tumblr_static_4r2v6v7grzc48wwgg44ck0ok0_640.gif")'
-			: 'url("https://i.pinimg.com/originals/50/ff/c8/50ffc8da808e31a16eed77b741afe480.gif")'
+	areaDoJogo.style.backgroundImage = `url('../assets/gifs/${cenario}.gif')`
 
-	areaDoJogo.style.backgroundRepeat = 'no-repeat'
-	areaDoJogo.style.backgroundSize = 'cover'
 	const altura = areaDoJogo.clientHeight
 	const largura = areaDoJogo.clientWidth
 
-	const progresso = new Progresso()
+	const progress = new Progress()
+	const coinProgress = new CoinProgress()
 	const barreiras = new Barreiras(
 		altura,
 		largura,
 		parseInt(intervaloCanos),
 		parseInt(distanciaCanos),
 		() => {
-			audio_coin.play()
-			progresso.atualizarPontos((pontos += parseInt(pontuacao)))
+			audio_pipe.play()
+			progress.atualizarPontos((points += parseInt(pontuacao)))
 		}
 	)
+	const coins = new Coins(altura, largura, parseInt(distanciaCanos))
 
-	let audio_coin = document.querySelector('[coin]')
+	let audio_pipe = document.querySelector('[pipe]')
 	let audio_die = document.querySelector('[die]')
-	let audio_brad = document.querySelector('[brad]')
+	let audio_ring = document.querySelector('[ring]')
 
-	const character = new createCharacter(altura, personagem, velPersonagem)
+	const character = new CreateCharacter(altura, personagem, velPersonagem)
 
-	areaDoJogo.appendChild(progresso.elemento)
+	document.getElementById('nome-usuario').innerHTML = nome
+
+	areaDoJogo.appendChild(progress.elemento)
+	areaDoJogo.appendChild(coinProgress.element)
 	areaDoJogo.appendChild(character.elemento)
 	barreiras.pares.forEach(par => areaDoJogo.appendChild(par.elemento))
+	coins.coins.forEach(par => areaDoJogo.appendChild(par.elemento))
 
 	this.start = () => {
 		const temporizador = setInterval(() => {
 			barreiras.animar()
+			coins.animar()
 			character.animar()
 
-			if (tipo === 'real') {
-				if (colidiu(character, barreiras)) {
-					audio_die.play()
-					clearInterval(temporizador)
-					document.querySelector('[game-over]').style.display = 'flex'
-				}
+			if (tipo === 'real' && colidiu(character, barreiras)) {
+				audio_die.play()
+				clearInterval(temporizador)
+				document.querySelector('[game-over]').style.display = 'flex'
+			}
+
+			if (coinColision(character)) {
+				audio_ring.play()
+				coinProgress.updateCoinPoints(++coinPoints)
 			}
 		}, velJogo)
 	}
@@ -195,9 +287,8 @@ function FlappyBird(
 	const velPersonagem = urlParams.get('vel-personagem')
 	const pontuacao = urlParams.get('pontuacao')
 
-	document.getElementById('nome-usuario').innerHTML = nome
-
 	new FlappyBird(
+		nome,
 		cenario,
 		intervaloCanos,
 		distanciaCanos,

@@ -10,6 +10,7 @@
 	<body>
 		<div class="container-form">
 			<h2>Configurações do jogo</h2>
+
 			<form action="./index.html" method="get" id="form">
 				<div class="form-group">
 					<label for="nome">Nome do jogador: </label>
@@ -22,11 +23,11 @@
 						type="radio"
 						id="noturno"
 						name="cenario"
-						value="noturno"
+						value="nigth_scene"
 						checked
 					/>
 					<label for="diurno">Diurno</label>
-					<input type="radio" id="diurno" name="cenario" value="diurno" />
+					<input type="radio" id="diurno" name="cenario" value="day_scene" />
 				</div>
 				<div class="form-group">
 					<label for="intervalo">Intervalo entre a abertura dos canos: </label>
@@ -35,7 +36,7 @@
 						type="radio"
 						id="intervalo-facil"
 						name="intervalo"
-						value="150"
+						value="250"
 					/>
 					<label for="intervalo-medio">medio</label>
 					<input
@@ -50,7 +51,7 @@
 						type="radio"
 						id="intervalo-dificil"
 						name="intervalo"
-						value="250"
+						value="150"
 					/>
 				</div>
 				<div class="form-group">
@@ -60,7 +61,7 @@
 						type="radio"
 						id="distancia-facil"
 						name="distancia"
-						value="300"
+						value="500"
 					/>
 					<label for="distancia-medio">medio</label>
 					<input
@@ -75,7 +76,7 @@
 						type="radio"
 						id="distancia-dificil"
 						name="distancia"
-						value="500"
+						value="300"
 					/>
 				</div>
 				<div class="form-group">
