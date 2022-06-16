@@ -7,19 +7,23 @@
 	</head>
 
 	<body class="conteudo">
-		<h1>Flappy Bird <a href="./formulario.html">voltar</a></h1>
+		<h1>Flappy Bird</h1>
 		<h3 id="nome-usuario"></h3>
 
-		<div wm-flappy></div>
+		<div wm-flappy>
+			<a href="./formulario.html"
+				><img gear-img src="./assets/imgs/gear.png" alt="" /> /></a
+			>
+		</div>
 
 		<div game-over style="display: none">
 			<p>Game Over</p>
 			<a onclick="window.location.reload();">Play Again</a>
 		</div>
 
-		<audio brad src="./sounds/brad.mp3"></audio>
-		<audio coin src="./sounds/smb_coin.wav"></audio>
-		<audio die src="./sounds/smb_mariodie.wav"></audio>
+		<audio ring src="./assets/sounds/ring.mp3"></audio>
+		<audio pipe src="./assets/sounds/smb_coin.wav"></audio>
+		<audio die src="./assets/sounds/smb_mariodie.wav"></audio>
 
 		<script src="js/flappy.js"></script>
 	</body>
