@@ -81,6 +81,9 @@ body {
 	font-family: Pixel;
 	font-size: 70px;
 	z-index: 100;
+
+	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-color: black;
 }
 
 [game-over] {
@@ -90,4 +93,6 @@ body {
 	font-family: Pixel;
 	font-size: 120px;
 	z-index: 100;
+	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-color: black;
 }

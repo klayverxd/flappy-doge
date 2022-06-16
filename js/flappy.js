@@ -67,7 +67,7 @@ function Passaro(alturaJogo, personagem, velPersonagem) {
 	let voando = false
 
 	this.elemento = novoElemento('img', 'passaro')
-	this.elemento.src = `img/${personagem}.png`
+	this.elemento.src = `assets/imgs/${personagem}.png`
 
 	this.getY = () => parseInt(this.elemento.style.bottom.split('px')[0])
 	this.setY = y => (this.elemento.style.bottom = `${y}px`)
@@ -135,8 +135,13 @@ function FlappyBird(
 	let pontos = 0
 
 	const areaDoJogo = document.querySelector('[wm-flappy]')
-	areaDoJogo.style.backgroundColor =
-		cenario === 'noturno' ? 'black' : 'lightgray'
+	areaDoJogo.style.backgroundImage =
+		cenario === 'noturno'
+			? 'url("https://krydastal.files.wordpress.com/2016/12/tumblr_static_tumblr_static_4r2v6v7grzc48wwgg44ck0ok0_640.gif")'
+			: 'url("https://i.pinimg.com/originals/50/ff/c8/50ffc8da808e31a16eed77b741afe480.gif")'
+
+	areaDoJogo.style.backgroundRepeat = 'no-repeat'
+	areaDoJogo.style.backgroundSize = 'cover'
 	const altura = areaDoJogo.clientHeight
 	const largura = areaDoJogo.clientWidth
 
