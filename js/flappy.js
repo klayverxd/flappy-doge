@@ -171,6 +171,7 @@ function FlappyBird(
 				if (colidiu(passaro, barreiras)) {
 					audio_die.play()
 					clearInterval(temporizador)
+					document.querySelector('[game-over]').innerHTML = 'Game Over'
 				}
 			}
 		}, velJogo)

@@ -82,3 +82,12 @@ body {
 	font-size: 70px;
 	z-index: 100;
 }
+
+[game-over] {
+	position: absolute;
+	top: 25%;
+	left: 35%;
+	font-family: Pixel;
+	font-size: 120px;
+	z-index: 100;
+}
