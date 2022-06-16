@@ -7,15 +7,15 @@
 	</head>
 
 	<body class="conteudo">
-		<h1>
-			Flappy Bird <a href="./formulario.html">voltar</a
-			><button onclick="window.location.reload();">reload</button>
-		</h1>
+		<h1>Flappy Bird <a href="./formulario.html">voltar</a></h1>
 		<h3 id="nome-usuario"></h3>
 
 		<div wm-flappy></div>
 
-		<p game-over></p>
+		<div game-over style="display: none">
+			<p>Game Over</p>
+			<a onclick="window.location.reload();">Play Again</a>
+		</div>
 
 		<audio brad src="./sounds/brad.mp3"></audio>
 		<audio coin src="./sounds/smb_coin.wav"></audio>

@@ -176,7 +176,7 @@ function FlappyBird(
 				if (colidiu(character, barreiras)) {
 					audio_die.play()
 					clearInterval(temporizador)
-					document.querySelector('[game-over]').innerHTML = 'Game Over'
+					document.querySelector('[game-over]').style.display = 'flex'
 				}
 			}
 		}, velJogo)

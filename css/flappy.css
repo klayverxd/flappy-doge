@@ -90,9 +90,32 @@ body {
 	position: absolute;
 	top: 25%;
 	left: 35%;
+	z-index: 100;
+
+	flex-direction: column;
+	align-items: center;
+}
+
+[game-over] p {
 	font-family: Pixel;
 	font-size: 120px;
-	z-index: 100;
 	-webkit-text-stroke-width: 2px;
 	-webkit-text-stroke-color: black;
+}
+
+[game-over] a {
+	font-family: Pixel;
+	font-size: 65px;
+	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-color: black;
+
+	cursor: pointer;
+
+	transition: transform 0.3s;
+}
+
+[game-over] a:hover {
+	color: rgb(71, 71, 214);
+	-webkit-text-stroke-color: rgb(230, 230, 230);
+	transform: scale(1.1);
 }
