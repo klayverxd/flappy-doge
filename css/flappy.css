@@ -38,7 +38,7 @@ body {
 	overflow: hidden;
 }
 
-.passaro {
+.character {
 	position: absolute;
 	width: 60px;
 	left: calc(50% - 30px);

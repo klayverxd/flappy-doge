@@ -63,10 +63,10 @@ function Barreiras(altura, largura, abertura, espaco, notificarPonto) {
 	}
 }
 
-function Passaro(alturaJogo, personagem, velPersonagem) {
+function createCharacter(alturaJogo, personagem, velPersonagem) {
 	let voando = false
 
-	this.elemento = novoElemento('img', 'passaro')
+	this.elemento = novoElemento('img', 'character')
 	this.elemento.src = `assets/imgs/${personagem}.png`
 
 	this.getY = () => parseInt(this.elemento.style.bottom.split('px')[0])
@@ -107,7 +107,7 @@ function estaoSobrepostos(elementoA, elementoB) {
 	return horizontal && vertical
 }
 
-function colidiu(passaro, barreiras) {
+function colidiu(character, barreiras) {
 	let colidiu = false
 
 	barreiras.pares.forEach(parDeBarreiras => {
@@ -115,8 +115,8 @@ function colidiu(passaro, barreiras) {
 			const superior = parDeBarreiras.superior.elemento
 			const inferior = parDeBarreiras.inferior.elemento
 			colidiu =
-				estaoSobrepostos(passaro.elemento, superior) ||
-				estaoSobrepostos(passaro.elemento, inferior)
+				estaoSobrepostos(character.elemento, superior) ||
+				estaoSobrepostos(character.elemento, inferior)
 		}
 	})
 	return colidiu
@@ -161,19 +161,19 @@ function FlappyBird(
 	let audio_die = document.querySelector('[die]')
 	let audio_brad = document.querySelector('[brad]')
 
-	const passaro = new Passaro(altura, personagem, velPersonagem)
+	const character = new createCharacter(altura, personagem, velPersonagem)
 
 	areaDoJogo.appendChild(progresso.elemento)
-	areaDoJogo.appendChild(passaro.elemento)
+	areaDoJogo.appendChild(character.elemento)
 	barreiras.pares.forEach(par => areaDoJogo.appendChild(par.elemento))
 
 	this.start = () => {
 		const temporizador = setInterval(() => {
 			barreiras.animar()
-			passaro.animar()
+			character.animar()
 
 			if (tipo === 'real') {
-				if (colidiu(passaro, barreiras)) {
+				if (colidiu(character, barreiras)) {
 					audio_die.play()
 					clearInterval(temporizador)
 					document.querySelector('[game-over]').innerHTML = 'Game Over'
