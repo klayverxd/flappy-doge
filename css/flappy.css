@@ -16,9 +16,22 @@ html {
 
 body {
 	margin: 0;
-	background-color: #0d262d;
 	color: #fff;
 	height: 100%;
+	background-image: url('../assets/imgs/bg-brick.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+h2 {
+	font-family: Pixel;
+	font-size: 50px;
+
+	margin: 10px;
+
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: black;
 }
 
 .conteudo {
@@ -31,11 +44,13 @@ body {
 [wm-flappy] {
 	position: relative;
 	border: 5px solid dodgerblue;
+
 	height: 700px;
 	width: 1200px;
 	margin: 15px;
 	overflow: hidden;
 
+	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -54,7 +69,9 @@ body {
 	position: absolute;
 	height: 50px;
 	width: 50px;
+
 	background-image: url('../assets/gifs/ring.gif');
+	background-position: center;
 	background-size: cover;
 }
 

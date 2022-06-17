@@ -247,7 +247,7 @@ function FlappyBird(
 
 	const character = new CreateCharacter(altura, personagem, velPersonagem)
 
-	document.getElementById('nome-usuario').innerHTML = nome
+	document.getElementById('user-name').innerHTML = nome
 
 	areaDoJogo.appendChild(progress.elemento)
 	areaDoJogo.appendChild(character.elemento)
