@@ -147,6 +147,24 @@ h2 {
 	transform: scale(1.12);
 }
 
+[sound-icon] {
+	cursor: pointer;
+
+	position: absolute;
+	bottom: 75px;
+	left: 18px;
+	height: 40px;
+	width: 40px;
+
+	transition: transform 0.15s;
+
+	z-index: 100;
+}
+
+[sound-icon]:hover {
+	transform: scale(1.12);
+}
+
 .coin-counter-container {
 	position: absolute;
 	top: 10px;
