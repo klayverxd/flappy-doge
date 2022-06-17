@@ -122,11 +122,13 @@ function Coins(altura, largura, espaco) {
 	}
 }
 
-function CreateCharacter(alturaJogo, personagem, velPersonagem) {
+function CreateCharacter(alturaJogo, personagem, tipo, velPersonagem) {
 	let voando = false
 
 	this.elemento = newElement('img', 'character')
-	this.elemento.src = `assets/imgs/${personagem}.png`
+	this.elemento.src = `assets/imgs/${
+		tipo === 'treino' ? 'ghost' : personagem
+	}.png`
 
 	this.getY = () => parseInt(this.elemento.style.bottom.split('px')[0])
 	this.setY = y => (this.elemento.style.bottom = `${y}px`)
@@ -247,7 +249,7 @@ function FlappyBird(
 	let audio_die = document.querySelector('[die]')
 	let audio_ring = document.querySelector('[ring]')
 
-	const character = new CreateCharacter(altura, personagem, velPersonagem)
+	const character = new CreateCharacter(altura, personagem, tipo, velPersonagem)
 
 	document.getElementById('user-name').innerHTML = nome
 
