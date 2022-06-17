@@ -103,10 +103,10 @@ function Coin(alturaJogo, popsicaoNaTela) {
 
 function Coins(altura, largura, espaco) {
 	this.coins = [
-		new Coin(altura, largura - espaco / 2),
-		new Coin(altura, largura + espaco / 2),
-		new Coin(altura, largura + (espaco / 2) * 3),
-		new Coin(altura, largura + (espaco / 2) * 5),
+		new Coin(altura, largura - espaco / 2 + 50),
+		new Coin(altura, largura + espaco / 2 + 50),
+		new Coin(altura, largura + (espaco / 2) * 3 + 50),
+		new Coin(altura, largura + (espaco / 2) * 5 + 50),
 	]
 
 	const deslocamento = 3
@@ -158,10 +158,10 @@ function Progress() {
 }
 
 function CoinProgress() {
-	this.element = newElement('span', 'coin-progress')
+	const coinCounter = document.querySelector('[coin-counter]')
 
 	this.updateCoinPoints = points => {
-		this.element.innerHTML = points
+		coinCounter.innerHTML = `x ${points}`
 	}
 
 	this.updateCoinPoints(0)
@@ -250,7 +250,6 @@ function FlappyBird(
 	document.getElementById('nome-usuario').innerHTML = nome
 
 	areaDoJogo.appendChild(progress.elemento)
-	areaDoJogo.appendChild(coinProgress.element)
 	areaDoJogo.appendChild(character.elemento)
 	barreiras.pares.forEach(par => areaDoJogo.appendChild(par.elemento))
 	coins.coins.forEach(par => areaDoJogo.appendChild(par.elemento))
