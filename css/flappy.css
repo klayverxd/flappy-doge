@@ -61,10 +61,6 @@ h2 {
 	left: calc(50% - 30px);
 }
 
-.coin-container {
-	position: absolute;
-}
-
 .coin {
 	position: absolute;
 	height: 50px;

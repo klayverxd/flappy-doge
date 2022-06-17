@@ -63,39 +63,32 @@ function Barreiras(altura, largura, abertura, espaco, notificarPonto) {
 	}
 }
 
-function createCoin() {
-	this.elemento = newElement('div', 'coin')
+function Coin(alturaJogo, popsicaoNaTela) {
+	this.element = newElement('div', 'coin')
 
 	this.setAltura = altura => {
-		this.elemento.style.top = `${altura}px`
+		this.element.style.top = `${altura}px`
 	}
-
-	this.getY = () => parseInt(this.elemento.style.top.split('px')[0])
-}
-
-function Coin(alturaJogo, popsicaoNaTela) {
-	this.elemento = newElement('div', 'coin-container')
-	this.coin = new createCoin('div', 'coin')
-
-	this.elemento.appendChild(this.coin.elemento)
 
 	this.sortearAltura = () => {
 		const alturaMoeda = Math.random() * alturaJogo
 		const alturaMaxima = alturaJogo - 100
 
 		if (alturaMoeda <= 0) {
-			this.coin.setAltura(0)
+			this.setAltura(0)
 		} else if (alturaMoeda >= alturaMaxima) {
-			this.coin.setAltura(alturaMaxima)
+			this.setAltura(alturaMaxima)
 		} else {
-			this.coin.setAltura(alturaMoeda)
+			this.setAltura(alturaMoeda)
 		}
 	}
 
-	this.getX = () => parseInt(this.elemento.style.left.split('px')[0])
 	this.setX = popsicaoNaTela =>
-		(this.elemento.style.left = `${popsicaoNaTela}px`)
-	this.getLargura = () => this.elemento.clientWidth
+		(this.element.style.left = `${popsicaoNaTela}px`)
+
+	this.getY = () => parseInt(this.element.style.top.split('px')[0])
+	this.getX = () => parseInt(this.element.style.left.split('px')[0])
+	this.getLargura = () => this.element.clientWidth
 
 	this.sortearAltura()
 	this.setX(popsicaoNaTela)
@@ -223,8 +216,6 @@ function FlappyBird(
 	let points = 0
 	let coinPoints = 0
 
-	const mutedStorage = localStorage.getItem('muted')
-
 	const areaDoJogo = document.querySelector('[wm-flappy]')
 	areaDoJogo.style.backgroundImage = `url('../assets/gifs/${cenario}.gif')`
 
@@ -256,7 +247,7 @@ function FlappyBird(
 	areaDoJogo.appendChild(progress.elemento)
 	areaDoJogo.appendChild(character.elemento)
 	barreiras.pares.forEach(par => areaDoJogo.appendChild(par.elemento))
-	coins.coins.forEach(par => areaDoJogo.appendChild(par.elemento))
+	coins.coins.forEach(coin => areaDoJogo.appendChild(coin.element))
 
 	this.start = () => {
 		const temporizador = setInterval(() => {
@@ -282,8 +273,6 @@ function FlappyBird(
 						ringPoints: ringPoints,
 					})
 				)
-
-				// const { score, ringPoints } = JSON.parse(localStorage.getItem('points'))
 
 				// escreve mensagem da pontuação
 				document.querySelector(
@@ -320,20 +309,20 @@ function toggleSound() {
 }
 
 ;(_ => {
-	const urlParams = new URLSearchParams(window.location.search)
-	const nome = urlParams.get('nome')
-	const cenario = urlParams.get('cenario')
-	const intervaloCanos = urlParams.get('intervalo')
-	const distanciaCanos = urlParams.get('distancia')
-	const velJogo = urlParams.get('vel-jogo')
-	const personagem = urlParams.get('personagem')
-	const tipo = urlParams.get('tipo')
-	const velPersonagem = urlParams.get('vel-personagem')
-	const pontuacao = urlParams.get('pontuacao')
+	const urlParams = new URLSearchParams(window.location.search),
+		nome = urlParams.get('nome'),
+		cenario = urlParams.get('cenario'),
+		intervaloCanos = urlParams.get('intervalo'),
+		distanciaCanos = urlParams.get('distancia'),
+		velJogo = urlParams.get('vel-jogo'),
+		personagem = urlParams.get('personagem'),
+		tipo = urlParams.get('tipo'),
+		velPersonagem = urlParams.get('vel-personagem'),
+		pontuacao = urlParams.get('pontuacao')
 
-	const soundElement = document.querySelector('[sound-icon]')
-	const sound = soundElement.src.split('sound-')[1].split('.png')[0]
-	const mutedStorage = localStorage.getItem('muted')
+	const soundElement = document.querySelector('[sound-icon]'),
+		sound = soundElement.src.split('sound-')[1].split('.png')[0],
+		mutedStorage = localStorage.getItem('muted')
 
 	localStorage.setItem(
 		'points',
