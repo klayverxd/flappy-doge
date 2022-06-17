@@ -19,15 +19,15 @@
 				<div class="form-group">
 					<label for="cenario">Cenário do jogo: </label>
 					<label for="noturno">Noturno</label>
+					<input type="radio" id="noturno" name="cenario" value="nigth_scene" />
+					<label for="diurno">Diurno</label>
 					<input
 						type="radio"
-						id="noturno"
+						id="diurno"
 						name="cenario"
-						value="nigth_scene"
+						value="day_scene"
 						checked
 					/>
-					<label for="diurno">Diurno</label>
-					<input type="radio" id="diurno" name="cenario" value="day_scene" />
 				</div>
 				<div class="form-group">
 					<label for="intervalo">Intervalo entre a abertura dos canos: </label>
@@ -80,7 +80,7 @@
 					/>
 				</div>
 				<div class="form-group">
-					<label for="velocidade">Velocidade do jogo: </label>
+					<label for="velocidade">Velocidade do jogo: (0-50)</label>
 					<input
 						type="number"
 						id="velocidade"
