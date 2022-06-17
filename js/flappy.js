@@ -221,6 +221,8 @@ function FlappyBird(
 	let points = 0
 	let coinPoints = 0
 
+	const mutedStorage = localStorage.getItem('muted')
+
 	const areaDoJogo = document.querySelector('[wm-flappy]')
 	areaDoJogo.style.backgroundImage = `url('../assets/gifs/${cenario}.gif')`
 
@@ -261,7 +263,7 @@ function FlappyBird(
 			character.animar()
 
 			if (tipo === 'real' && colidiu(character, barreiras)) {
-				audio_die.play()
+				mutedStorage && audio_die.play()
 				clearInterval(temporizador)
 				document.querySelector('[game-over]').style.display = 'flex'
 			}
@@ -272,6 +274,26 @@ function FlappyBird(
 			}
 		}, velJogo)
 	}
+}
+
+function setSound(soundElement, sound) {
+	const soundValue = sound === 'true'
+
+	soundElement.src = `./assets/imgs/sound-${soundValue ? 'on' : 'off'}.png`
+
+	document.querySelectorAll('audio').forEach(item => {
+		item.muted = !soundValue
+		item.pause()
+	})
+}
+
+function toggleSound() {
+	const soundElement = document.querySelector('[sound-icon]')
+	const sound = soundElement.src.split('sound-')[1].split('.png')[0]
+
+	setSound(soundElement, sound === 'on' ? 'false' : 'true')
+
+	localStorage.setItem('muted', sound === 'on' ? false : true)
 }
 
 ;(_ => {
@@ -285,6 +307,16 @@ function FlappyBird(
 	const tipo = urlParams.get('tipo')
 	const velPersonagem = urlParams.get('vel-personagem')
 	const pontuacao = urlParams.get('pontuacao')
+
+	const soundElement = document.querySelector('[sound-icon]')
+	const sound = soundElement.src.split('sound-')[1].split('.png')[0]
+	const mutedStorage = localStorage.getItem('muted')
+
+	if (mutedStorage !== null) {
+		setSound(soundElement, mutedStorage)
+	} else {
+		localStorage.setItem('muted', sound === 'on')
+	}
 
 	new FlappyBird(
 		nome,
