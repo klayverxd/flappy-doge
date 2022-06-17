@@ -265,9 +265,30 @@ function FlappyBird(
 			character.animar()
 
 			if (tipo === 'real' && colidiu(character, barreiras)) {
-				mutedStorage && audio_die.play()
+				audio_die.play()
 				clearInterval(temporizador)
 				document.querySelector('[game-over]').style.display = 'flex'
+
+				// captura pontos das argolas
+				const ringPoints = document
+					.querySelector('[coin-counter]')
+					.innerText.split('x')[1]
+
+				// salva pontuação
+				localStorage.setItem(
+					'points',
+					JSON.stringify({
+						score: progress.elemento.innerText,
+						ringPoints: ringPoints,
+					})
+				)
+
+				// const { score, ringPoints } = JSON.parse(localStorage.getItem('points'))
+
+				// escreve mensagem da pontuação
+				document.querySelector(
+					'[score-message]'
+				).innerHTML = `${nome} sua pontuacao foi ${progress.elemento.innerText} e voce pegou ${coinPoints} argolas.`
 			}
 
 			if (coinColision(character)) {
@@ -313,6 +334,14 @@ function toggleSound() {
 	const soundElement = document.querySelector('[sound-icon]')
 	const sound = soundElement.src.split('sound-')[1].split('.png')[0]
 	const mutedStorage = localStorage.getItem('muted')
+
+	localStorage.setItem(
+		'points',
+		JSON.stringify({
+			score: 0,
+			ringPoints: 0,
+		})
+	)
 
 	if (mutedStorage !== null) {
 		setSound(soundElement, mutedStorage)

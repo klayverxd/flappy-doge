@@ -12,7 +12,7 @@
 		<div wm-flappy>
 			<div class="coin-counter-container">
 				<img coin-icon src="./assets/gifs/ring.gif" alt="" />
-				<span coin-counter>s</span>
+				<span coin-counter></span>
 			</div>
 
 			<div>
@@ -25,11 +25,12 @@
 					onclick="toggleSound()"
 				/>
 			</div>
-		</div>
 
-		<div game-over style="display: none">
-			<p>Game Over</p>
-			<a onclick="window.location.reload();">Play Again</a>
+			<div game-over style="display: none">
+				<h1>Game Over</h1>
+				<h3 score-message></h3>
+				<a onclick="window.location.reload();">Play Again</a>
+			</div>
 		</div>
 
 		<audio ring src="./assets/sounds/ring.mp3"></audio>
