@@ -263,7 +263,7 @@ function FlappyBird(
 			character.animar()
 
 			if (tipo === 'real' && colidiu(character, barreiras)) {
-				mutedStorage && audio_die.play()
+				audio_die.play()
 				clearInterval(temporizador)
 				document.querySelector('[game-over]').style.display = 'flex'
 			}
