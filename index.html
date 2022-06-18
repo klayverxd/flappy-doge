@@ -11,77 +11,99 @@
 	<body>
 		<div class="container-form">
 			<h2>Configurações do jogo</h2>
+			<audio click-option src="./assets/sounds/click-option.wav"></audio>
 
 			<form action="./game.html" method="get" id="form">
 				<div class="form-group">
-					<label for="nome">Nome do jogador: </label>
+					<label for="nome" class="form-group-label">Nome do jogador: </label>
 					<input type="text" id="nome" name="nome" value="Kick Buttowisk" />
 				</div>
 				<div class="form-group">
-					<label for="cenario">Cenário do jogo: </label>
-					<label for="noturno">Noturno</label>
-					<input type="radio" id="noturno" name="cenario" value="nigth_scene" />
-					<label for="diurno">Diurno</label>
+					<label for="cenario" class="form-group-label"
+						>Cenário do jogo:
+					</label>
+					<input
+						type="radio"
+						id="noturno"
+						name="cenario"
+						value="nigth_scene"
+						class="opacity"
+					/>
+					<label for="noturno">noturno</label>
 					<input
 						type="radio"
 						id="diurno"
 						name="cenario"
 						value="day_scene"
+						class="opacity"
 						checked
 					/>
+					<label for="diurno">diurno</label>
 				</div>
 				<div class="form-group">
-					<label for="intervalo">Intervalo entre a abertura dos canos: </label>
-					<label for="intervalo-facil">facil</label>
+					<label for="intervalo" class="form-group-label"
+						>Intervalo entre a abertura dos canos:
+					</label>
 					<input
 						type="radio"
 						id="intervalo-facil"
 						name="intervalo"
 						value="250"
+						class="opacity"
 					/>
-					<label for="intervalo-medio">medio</label>
+					<label for="intervalo-facil">fácil</label>
 					<input
 						type="radio"
 						id="intervalo-medio"
 						name="intervalo"
 						value="200"
+						class="opacity"
 						checked
 					/>
-					<label for="intervalo-dificil">dificil</label>
+					<label for="intervalo-medio">médio</label>
 					<input
 						type="radio"
 						id="intervalo-dificil"
 						name="intervalo"
 						value="150"
+						class="opacity"
 					/>
+					<label for="intervalo-dificil">difícil</label>
 				</div>
 				<div class="form-group">
-					<label for="distancia">Distancia entre os canos: </label>
-					<label for="distancia-facil">facil</label>
+					<label for="distancia" class="form-group-label"
+						>Distancia entre os canos:
+					</label>
 					<input
 						type="radio"
 						id="distancia-facil"
 						name="distancia"
 						value="500"
+						class="opacity"
 					/>
-					<label for="distancia-medio">medio</label>
+					<label for="distancia-facil">fácil</label>
 					<input
 						type="radio"
 						id="distancia-medio"
 						name="distancia"
 						value="400"
+						class="opacity"
 						checked
 					/>
-					<label for="distancia-dificil">dificil</label>
+					<label for="distancia-medio">médio</label>
 					<input
 						type="radio"
 						id="distancia-dificil"
 						name="distancia"
 						value="300"
+						class="opacity"
 					/>
+					<label for="distancia-dificil">difícil</label>
 				</div>
 				<div class="form-group">
-					<label for="velocidade">Velocidade do jogo: (0-50)</label>
+					<label for="velocidade" class="form-group-label"
+						>Velocidade do jogo: (0-50)</label
+					>
 					<input
 						type="number"
 						id="velocidade"
@@ -93,7 +115,7 @@
 					/>
 				</div>
 				<div class="form-group">
-					<label for="personagem">Personagens: </label>
+					<label for="personagem" class="form-group-label">Personagens: </label>
 					<select name="personagem">
 						<option value="kick" selected>Kick Buttowisk</option>
 						<option value="bob">Bob esponja</option>
@@ -101,39 +123,87 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="tipo">Tipo do jogo: </label>
+					<label for="tipo" class="form-group-label">Tipo do jogo: </label>
+					<input
+						type="radio"
+						id="treino"
+						name="tipo"
+						value="treino"
+						class="opacity"
+					/>
 					<label for="treino">treino</label>
-					<input type="radio" id="treino" name="tipo" value="treino" />
+					<input
+						type="radio"
+						id="real"
+						name="tipo"
+						value="real"
+						class="opacity"
+						checked
+					/>
 					<label for="real">real</label>
-					<input type="radio" id="real" name="tipo" value="real" checked />
 				</div>
 				<div class="form-group">
-					<label for="vel-personagem">Velocidade do personagem: </label>
+					<label for="vel-personagem" class="form-group-label"
+						>Velocidade do personagem:
+					</label>
+					<input
+						type="radio"
+						id="baixa"
+						name="vel-personagem"
+						value="5"
+						class="opacity"
+					/>
 					<label for="baixa">baixa</label>
-					<input type="radio" id="baixa" name="vel-personagem" value="5" />
-					<label for="media">media</label>
 					<input
 						type="radio"
 						id="media"
 						name="vel-personagem"
 						value="8"
+						class="opacity"
 						checked
 					/>
+					<label for="media">média</label>
+					<input
+						type="radio"
+						id="rapida"
+						name="vel-personagem"
+						value="10"
+						class="opacity"
+					/>
 					<label for="rapida">rapida</label>
-					<input type="radio" id="rapida" name="vel-personagem" value="10" />
 				</div>
 				<div class="form-group">
-					<label for="pontuacao">Pontuação: </label>
+					<label for="pontuacao" class="form-group-label">Pontuação: </label>
+					<input
+						type="radio"
+						id="1"
+						name="pontuacao"
+						value="1"
+						class="opacity"
+						checked
+					/>
 					<label for="1">1</label>
-					<input type="radio" id="1" name="pontuacao" value="1" checked />
+					<input
+						type="radio"
+						id="10"
+						name="pontuacao"
+						value="10"
+						class="opacity"
+					/>
 					<label for="10">10</label>
-					<input type="radio" id="10" name="pontuacao" value="10" />
+					<input
+						type="radio"
+						id="100"
+						name="pontuacao"
+						value="100"
+						class="opacity"
+					/>
 					<label for="100">100</label>
-					<input type="radio" id="100" name="pontuacao" value="100" />
 				</div>
-				<input type="submit" value="submit" />
+
+				<input type="submit" value="submit" onclick="init()" />
 			</form>
 		</div>
-		<script src="js/flappy.js"></script>
+		<script src="js/config.js"></script>
 	</body>
 </html>

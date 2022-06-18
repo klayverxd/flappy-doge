@@ -3,10 +3,18 @@
 	src: url('../fonts/Oswald-Regular.ttf') format('truetype');
 	font-family: 'Pixel';
 	src: url('../fonts/Pixel.ttf');
+	font-family: 'PixelGameFont';
+	src: url('../fonts/PixelGameFont.ttf');
+	font-family: 'Minecraftia-Regular';
+	src: url('../fonts/Minecraftia-Regular.ttf');
+	font-family: 'Retro';
+	src: url('../fonts/Retro.ttf');
+	font-family: 'Pixellari';
+	src: url('../fonts/Pixellari.ttf');
 }
 
 * {
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Pixellari', sans-serif;
 	box-sizing: border-box;
 }
 
@@ -23,6 +31,7 @@ body {
 
 form {
 	background-color: lightgray;
+	border-radius: 10px;
 	color: black;
 
 	display: flex;
@@ -31,8 +40,6 @@ form {
 	align-items: center;
 
 	padding: 20px;
-
-	border-radius: 20px;
 }
 
 .container-form {
@@ -45,4 +52,30 @@ form {
 
 .form-group {
 	margin-bottom: 10px;
+	display: flex;
+}
+
+.form-group-label {
+	margin-right: 1rem;
+}
+
+.opacity {
+	display: none;
+}
+
+input[type='radio'] + label {
+	transition: transform 0.1s;
+}
+
+input[type='radio'] + label:hover {
+	transform: scale(1.05);
+}
+
+input[type='radio'] + label:not(:last-child) {
+	margin-right: 1rem;
+}
+
+input[type='radio']:checked + label {
+	font-weight: bold;
+	text-decoration: underline;
 }
