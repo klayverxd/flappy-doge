@@ -71,6 +71,17 @@ h2 {
 	background-size: cover;
 }
 
+.mushroom {
+	position: absolute;
+	height: 50px;
+	width: 50px;
+
+	/* background-image: url('https://i.gifer.com/origin/ef/ef773d4ccbe5b7548a6fcc38b902ec7e_w200.gif'); */
+	background-image: url('https://aws1.discourse-cdn.com/boingboing/original/4X/3/1/f/31f8193d41672c9165692a965436964d9df77b4e.gif');
+	background-position: center;
+	background-size: cover;
+}
+
 .par-de-barreiras {
 	position: absolute;
 	top: 0;
@@ -184,6 +195,24 @@ h2 {
 	width: 50px;
 
 	z-index: 200;
+}
+
+.mushroom-counter-container {
+	position: absolute;
+	top: 70px;
+	left: 50px;
+
+	display: flex;
+
+	z-index: 100;
+}
+
+.mushroom-counter-container span {
+	font-family: Pixel;
+	font-size: 50px;
+
+	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-color: black;
 }
 
 [game-over] {

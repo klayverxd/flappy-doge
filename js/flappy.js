@@ -115,6 +115,54 @@ function Coins(altura, largura, espaco) {
 	}
 }
 
+function Mushroom(alturaJogo, popsicaoNaTela) {
+	this.element = newElement('div', 'mushroom')
+
+	this.setAltura = altura => {
+		this.element.style.top = `${altura}px`
+	}
+
+	this.sortearAltura = () => {
+		const alturaMushroom = Math.random() * alturaJogo
+		const alturaMaxima = alturaJogo - 100
+
+		if (alturaMushroom <= 0) {
+			this.setAltura(0)
+		} else if (alturaMushroom >= alturaMaxima) {
+			this.setAltura(alturaMaxima)
+		} else {
+			this.setAltura(alturaMushroom)
+		}
+	}
+
+	this.setX = popsicaoNaTela =>
+		(this.element.style.left = `${popsicaoNaTela}px`)
+
+	this.getY = () => parseInt(this.element.style.top.split('px')[0])
+	this.getX = () => parseInt(this.element.style.left.split('px')[0])
+	this.getLargura = () => this.element.clientWidth
+
+	this.sortearAltura()
+	this.setX(popsicaoNaTela)
+}
+
+function Mushrooms(altura, largura, espaco) {
+	this.mushrooms = [new Mushroom(altura, largura + espaco / 2 + 50)]
+
+	const deslocamento = 3
+	const gaps = 5
+	this.animar = () => {
+		this.mushrooms.forEach(mushroom => {
+			mushroom.setX(mushroom.getX() - deslocamento)
+
+			if (mushroom.getX() < -mushroom.getLargura()) {
+				mushroom.setX(mushroom.getX() + espaco * gaps * this.mushrooms.length)
+				mushroom.sortearAltura()
+			}
+		})
+	}
+}
+
 function CreateCharacter(alturaJogo, personagem, tipo, velPersonagem) {
 	let voando = false
 
@@ -202,6 +250,22 @@ function coinColision(character) {
 	return colision
 }
 
+function mushroomColision(character) {
+	let colision = false
+
+	const mushrooms = document.querySelectorAll('.mushroom')
+
+	mushrooms.forEach(mushroom => {
+		if (!colision) {
+			colision = estaoSobrepostos(character.elemento, mushroom)
+			colision &&
+				(mushroom.style.display = 'none') &&
+				setTimeout(() => (mushroom.style.display = 'block'), 5000)
+		}
+	})
+	return colision
+}
+
 function FlappyBird(
 	nome,
 	cenario,
@@ -235,6 +299,7 @@ function FlappyBird(
 		}
 	)
 	const coins = new Coins(altura, largura, parseInt(distanciaCanos))
+	const mushrooms = new Mushrooms(altura, largura, parseInt(distanciaCanos))
 
 	let audio_pipe = document.querySelector('[pipe]')
 	let audio_die = document.querySelector('[die]')
@@ -248,14 +313,20 @@ function FlappyBird(
 	areaDoJogo.appendChild(character.elemento)
 	barreiras.pares.forEach(par => areaDoJogo.appendChild(par.elemento))
 	coins.coins.forEach(coin => areaDoJogo.appendChild(coin.element))
+	mushrooms.mushrooms.forEach(mushroom =>
+		areaDoJogo.appendChild(mushroom.element)
+	)
+
+	let mushroomActive = false
 
 	this.start = () => {
 		const temporizador = setInterval(() => {
 			barreiras.animar()
 			coins.animar()
+			mushrooms.animar()
 			character.animar()
 
-			if (tipo === 'real' && colidiu(character, barreiras)) {
+			if (tipo === 'real' && !mushroomActive && colidiu(character, barreiras)) {
 				audio_die.play()
 				clearInterval(temporizador)
 				document.querySelector('[game-over]').style.display = 'flex'
@@ -283,6 +354,28 @@ function FlappyBird(
 			if (coinColision(character)) {
 				audio_ring.play()
 				coinProgress.updateCoinPoints(++coinPoints)
+			}
+
+			if (mushroomColision(character)) {
+				document.querySelector('.character').src = 'assets/imgs/ghost.png'
+				mushroomActive = !mushroomActive
+
+				let mushroomEffectDuration = 7000
+
+				const mushroomInterval = setInterval(() => {
+					mushroomEffectDuration -= 50
+					document.querySelector('[mushroom-counter]').innerHTML =
+						mushroomEffectDuration
+				}, 50)
+
+				setTimeout(() => {
+					document.querySelector(
+						'.character'
+					).src = `assets/imgs/${personagem}.png`
+					mushroomActive = !mushroomActive
+
+					clearInterval(mushroomInterval)
+				}, mushroomEffectDuration)
 			}
 		}, velJogo)
 	}
