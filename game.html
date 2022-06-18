@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Flappy Bird</title>
+		<link rel="stylesheet" href="css/flappy.css" />
+	</head>
+
+	<body class="conteudo">
+		<h2 id="user-name"></h2>
+
+		<div wm-flappy>
+			<div class="coin-counter-container">
+				<img coin-icon src="./assets/gifs/ring.gif" alt="" />
+				<span coin-counter></span>
+			</div>
+
+			<div class="mushroom-counter-container">
+				<!-- <img coin-icon src="./assets/gifs/ring.gif" alt="" /> -->
+				<span mushroom-counter>Time</span>
+			</div>
+
+			<div>
+				<a href="./index.html"
+					><img gear-icon src="./assets/imgs/gear.png" alt="" /></a
+				><img
+					sound-icon
+					src="./assets/imgs/sound-on.png"
+					alt="Ícone de som"
+					onclick="toggleSound()"
+				/>
+			</div>
+
+			<div game-over style="display: none">
+				<h1>Game Over</h1>
+				<h3 score-message></h3>
+				<a onclick="window.location.reload();">Play Again</a>
+			</div>
+		</div>
+
+		<audio ring src="./assets/sounds/ring.mp3"></audio>
+		<audio pipe src="./assets/sounds/smb_coin.wav"></audio>
+		<audio die src="./assets/sounds/smb_mariodie.wav"></audio>
+
+		<script src="js/flappy.js"></script>
+	</body>
+</html>
