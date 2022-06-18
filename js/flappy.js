@@ -43,6 +43,7 @@ function Barreiras(altura, largura, abertura, espaco, notificarPonto) {
 		new ParDeBarreiras(altura, abertura, largura + espaco),
 		new ParDeBarreiras(altura, abertura, largura + espaco * 2),
 		new ParDeBarreiras(altura, abertura, largura + espaco * 3),
+		new ParDeBarreiras(altura, abertura, largura + espaco * 4),
 	]
 
 	const deslocamento = 3
@@ -100,6 +101,7 @@ function Coins(altura, largura, espaco) {
 		new Coin(altura, largura + espaco / 2 + 50),
 		new Coin(altura, largura + (espaco / 2) * 3 + 50),
 		new Coin(altura, largura + (espaco / 2) * 5 + 50),
+		new Coin(altura, largura + (espaco / 2) * 7 + 50),
 	]
 
 	const deslocamento = 3
@@ -326,15 +328,18 @@ function FlappyBird(
 
 			if (tipo === 'real' && !mushroomActive && colidiu(character, barreiras)) {
 				audio_die.play()
+				setTimeout(
+					() => document.querySelector('[game-over-points]').play(),
+					3200
+				)
+				audio_die.play()
 				clearInterval(temporizador)
 				document.querySelector('[game-over]').style.display = 'flex'
 
-				// captura pontos das argolas
 				const ringPoints = document
 					.querySelector('[coin-counter]')
 					.innerText.split('x')[1]
 
-				// salva pontuação
 				localStorage.setItem(
 					'points',
 					JSON.stringify({
@@ -342,11 +347,19 @@ function FlappyBird(
 						ringPoints: ringPoints,
 					})
 				)
+				;(_ => {
+					const element = document.querySelector('[score-message]')
+					const message =
+						`${nome} sua pontuacao foi ${progress.elemento.innerText} e voce pegou ${coinPoints} argolas.`.split(
+							''
+						)
 
-				// escreve mensagem da pontuação
-				document.querySelector(
-					'[score-message]'
-				).innerHTML = `${nome} sua pontuacao foi ${progress.elemento.innerText} e voce pegou ${coinPoints} argolas.`
+					message.forEach((letter, i) => {
+						setTimeout(() => {
+							element.innerHTML += letter
+						}, 75 * i)
+					})
+				})()
 			}
 
 			if (coinColision(character)) {
@@ -358,6 +371,8 @@ function FlappyBird(
 				document.querySelector('.character').src = 'assets/imgs/ghost.png'
 				mushroomActive = !mushroomActive
 
+				document.querySelector('[mushroom-sound]').play()
+
 				let mushroomEffectDuration = 7000
 
 				const mushroomInterval = setInterval(() => {
@@ -368,10 +383,12 @@ function FlappyBird(
 				}, 50)
 
 				setTimeout(() => {
-					document.querySelector(
-						'.character'
-					).src = `assets/imgs/${personagem}.png`
+					document.querySelector('.character').src = `assets/imgs/${
+						tipo === 'treino' ? 'ghost' : personagem
+					}.png`
 					mushroomActive = !mushroomActive
+
+					document.querySelector('[mushroom-final-effect]').play()
 
 					clearInterval(mushroomInterval)
 				}, mushroomEffectDuration)
@@ -411,6 +428,8 @@ function toggleSound() {
 		tipo = urlParams.get('tipo'),
 		velPersonagem = urlParams.get('vel-personagem'),
 		pontuacao = urlParams.get('pontuacao')
+
+	setTimeout(() => document.querySelector('[game-init]').play(), 1)
 
 	const soundElement = document.querySelector('[sound-icon]'),
 		sound = soundElement.src.split('sound-')[1].split('.png')[0],
