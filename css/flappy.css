@@ -76,8 +76,7 @@ h2 {
 	height: 50px;
 	width: 50px;
 
-	/* background-image: url('https://i.gifer.com/origin/ef/ef773d4ccbe5b7548a6fcc38b902ec7e_w200.gif'); */
-	background-image: url('https://aws1.discourse-cdn.com/boingboing/original/4X/3/1/f/31f8193d41672c9165692a965436964d9df77b4e.gif');
+	background-image: url('../assets/gifs/mushroom.gif');
 	background-position: center;
 	background-size: cover;
 }
@@ -190,7 +189,8 @@ h2 {
 	-webkit-text-stroke-color: black;
 }
 
-[coin-icon] {
+[coin-icon],
+[mushroom-icon] {
 	height: 50px;
 	width: 50px;
 
@@ -200,7 +200,7 @@ h2 {
 .mushroom-counter-container {
 	position: absolute;
 	top: 70px;
-	left: 50px;
+	left: 10px;
 
 	display: flex;
 

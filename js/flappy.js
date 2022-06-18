@@ -364,8 +364,9 @@ function FlappyBird(
 
 				const mushroomInterval = setInterval(() => {
 					mushroomEffectDuration -= 50
+
 					document.querySelector('[mushroom-counter]').innerHTML =
-						mushroomEffectDuration
+						mushroomEffectDuration.toString().padStart(4, '0') + 's'
 				}, 50)
 
 				setTimeout(() => {
