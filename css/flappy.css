@@ -24,35 +24,24 @@ body {
 	background-size: cover;
 }
 
-h2 {
-	font-family: Pixel;
-	font-size: 50px;
-
-	margin: 10px;
-
-	-webkit-text-stroke-width: 1px;
-	-webkit-text-stroke-color: black;
-}
-
-.conteudo {
+.main-container {
 	display: flex;
-	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 	min-height: 100%;
 }
 
 [wm-flappy] {
-	position: relative;
-	border: 5px solid dodgerblue;
-
-	height: 700px;
-	width: 1200px;
-	margin: 15px;
-	overflow: hidden;
-
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+
+	position: relative;
+	border: 5px solid dodgerblue;
+
+	height: 90%;
+	width: 90%;
+	overflow: hidden;
 }
 
 .character {
@@ -62,29 +51,30 @@ h2 {
 }
 
 .coin {
-	position: absolute;
-	height: 50px;
-	width: 50px;
-
 	background-image: url('../assets/gifs/ring.gif');
 	background-position: center;
 	background-size: cover;
-}
 
-.mushroom {
 	position: absolute;
 	height: 50px;
 	width: 50px;
+}
 
+.mushroom {
 	background-image: url('../assets/gifs/mushroom.gif');
 	background-position: center;
 	background-size: cover;
+
+	position: absolute;
+	height: 50px;
+	width: 50px;
 }
 
 .par-de-barreiras {
 	position: absolute;
 	top: 0;
 	height: 100%;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -92,23 +82,25 @@ h2 {
 
 .barreira {
 	display: flex;
-	flex-direction: column;
 	align-items: center;
+	flex-direction: column;
 }
 
 .barreira .borda {
-	height: 30px;
-	width: 130px;
 	background: linear-gradient(90deg, #639301, #a5e82e);
 	border: 2px solid #000;
+
+	height: 30px;
+	width: 130px;
 }
 
 .barreira .corpo {
-	height: 40px;
-	width: 110px;
 	background: linear-gradient(90deg, #639301, #a5e82e);
 	border-left: 2px solid #000;
 	border-right: 2px solid #000;
+
+	width: 110px;
+	height: 40px;
 }
 
 .progresso {
