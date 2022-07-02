@@ -68,6 +68,7 @@ input[type='radio'] + label {
 }
 
 input[type='radio'] + label:hover {
+	cursor: pointer;
 	transform: scale(1.05);
 }
 
@@ -78,4 +79,21 @@ input[type='radio'] + label:not(:last-child) {
 input[type='radio']:checked + label {
 	font-weight: bold;
 	text-decoration: underline;
+}
+
+input[type='submit'] {
+	background-color: #0c4e60;
+	color: #fff;
+
+	border: 1px solid #000;
+
+	padding: 8px 14px;
+
+	transition: transform 0.1s;
+}
+
+input[type='submit']:hover {
+	cursor: pointer;
+
+	transform: scale(1.05);
 }
