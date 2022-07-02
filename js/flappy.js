@@ -268,6 +268,26 @@ function mushroomColision(character) {
 	return colision
 }
 
+function setSound(soundElement, sound) {
+	const soundValue = sound === 'true'
+
+	soundElement.src = `./assets/imgs/sound-${soundValue ? 'on' : 'off'}.png`
+
+	document.querySelectorAll('audio').forEach(item => {
+		item.muted = !soundValue
+		item.pause()
+	})
+}
+
+function toggleSound() {
+	const soundElement = document.querySelector('[sound-icon]')
+	const sound = soundElement.src.split('sound-')[1].split('.png')[0]
+
+	setSound(soundElement, sound === 'on' ? 'false' : 'true')
+
+	localStorage.setItem('muted', sound === 'on' ? false : true)
+}
+
 function FlappyBird(
 	nome,
 	cenario,
@@ -283,7 +303,7 @@ function FlappyBird(
 	let coinPoints = 0
 
 	const areaDoJogo = document.querySelector('[wm-flappy]')
-	areaDoJogo.style.backgroundImage = `url('../assets/gifs/${cenario}.gif')`
+	areaDoJogo.style.backgroundImage = `url('assets/gifs/${cenario}.gif')`
 
 	const altura = areaDoJogo.clientHeight
 	const largura = areaDoJogo.clientWidth
@@ -395,26 +415,6 @@ function FlappyBird(
 			}
 		}, velJogo)
 	}
-}
-
-function setSound(soundElement, sound) {
-	const soundValue = sound === 'true'
-
-	soundElement.src = `./assets/imgs/sound-${soundValue ? 'on' : 'off'}.png`
-
-	document.querySelectorAll('audio').forEach(item => {
-		item.muted = !soundValue
-		item.pause()
-	})
-}
-
-function toggleSound() {
-	const soundElement = document.querySelector('[sound-icon]')
-	const sound = soundElement.src.split('sound-')[1].split('.png')[0]
-
-	setSound(soundElement, sound === 'on' ? 'false' : 'true')
-
-	localStorage.setItem('muted', sound === 'on' ? false : true)
 }
 
 ;(_ => {
