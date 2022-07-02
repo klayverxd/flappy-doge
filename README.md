@@ -1,5 +1,9 @@
 # TRABALHO 02 - TECNOLOGIAS WEB
 
+> 📽️ [Vídeo de apresentação](https://youtu.be/2959oA8AMzs)
+
+-----
+
 <div align="center">
   <img src=".github/logo.png" alt="Flappy" width="300px">
 </div>
